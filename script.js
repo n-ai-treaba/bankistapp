@@ -59,10 +59,7 @@ const labelSumOut = document.querySelector(".summary__value--out");
 const labelSumInterest = document.querySelector(".summary__value--interest");
 const labelTimer = document.querySelector(".timer");
 
-<<<<<<< HEAD
 const containerLogin = document.querySelector('.login');
-=======
->>>>>>> cdd2111f8e9d6a66922d43a501b973e46a218d87
 const containerApp = document.querySelector(".app");
 const containerMovements = document.querySelector(".movements");
 
@@ -196,10 +193,7 @@ const startLogOutTimer = function () {
       clearInterval(timer);
       labelWelcome.textContent = "Log in to get started";
       containerApp.style.opacity = 0;
-<<<<<<< HEAD
       containerLogin.style.display = 'flex';
-=======
->>>>>>> cdd2111f8e9d6a66922d43a501b973e46a218d87
     }
 
     // Decrease 1s
@@ -240,11 +234,7 @@ btnLogin.addEventListener("click", function (e) {
       currentAccount.owner.split(" ")[0]
     }`;
     containerApp.style.opacity = 100;
-<<<<<<< HEAD
     containerLogin.style.display = 'none';
-=======
-
->>>>>>> cdd2111f8e9d6a66922d43a501b973e46a218d87
     // Create current date and time
     const now = new Date();
     const options = {
@@ -353,10 +343,7 @@ btnClose.addEventListener("click", function (e) {
 
     // Hide UI
     containerApp.style.opacity = 0;
-<<<<<<< HEAD
     containerLogin.style.display = 'flex';
-=======
->>>>>>> cdd2111f8e9d6a66922d43a501b973e46a218d87
   }
 
   inputCloseUsername.value = inputClosePin.value = "";
