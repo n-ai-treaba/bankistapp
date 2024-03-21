@@ -47,7 +47,7 @@ const account2 = {
   locale: "en-US",
 };
 
-const accounts = [account1, account2];
+let accounts = [account1, account2];
 
 /////////////////////////////////////////////////
 // Elements
@@ -79,6 +79,13 @@ const inputClosePin = document.querySelector(".form__input--pin");
 
 /////////////////////////////////////////////////
 // Functions
+const getLocalStorage = function() {
+  localStorage.getItem('accounts') ?
+   accounts = JSON.parse(localStorage.getItem('accounts')) :
+   localStorage.setItem('accounts', JSON.stringify(accounts))
+   console.log(accounts);
+}
+getLocalStorage()
 
 const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
@@ -178,6 +185,7 @@ const updateUI = function (acc) {
 
   // Display summary
   calcDisplaySummary(acc);
+  localStorage.setItem('accounts', JSON.stringify(accounts))
 };
 
 const startLogOutTimer = function () {
