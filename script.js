@@ -59,6 +59,7 @@ const labelSumOut = document.querySelector(".summary__value--out");
 const labelSumInterest = document.querySelector(".summary__value--interest");
 const labelTimer = document.querySelector(".timer");
 
+const containerNav = document.querySelector('.nav');
 const containerLogin = document.querySelector('.login');
 const containerApp = document.querySelector(".app");
 const containerMovements = document.querySelector(".movements");
@@ -68,6 +69,7 @@ const btnTransfer = document.querySelector(".form__btn--transfer");
 const btnLoan = document.querySelector(".form__btn--loan");
 const btnClose = document.querySelector(".form__btn--close");
 const btnSort = document.querySelector(".btn--sort");
+let btnLogout;
 
 const inputLoginUsername = document.querySelector(".login__input--user");
 const inputLoginPin = document.querySelector(".login__input--pin");
@@ -256,6 +258,18 @@ btnLogin.addEventListener("click", function (e) {
     // const locale = navigator.language;
     // console.log(locale);
 
+    if(!btnLogout){containerNav.insertAdjacentHTML('beforeend', `<button class="nav__btn">Log Out</button>`)
+    btnLogout = document.querySelector('.nav__btn')
+    
+    btnLogout.addEventListener('click', function(e) {
+      e.preventDefault();
+      containerApp.style.opacity = 0;
+    containerLogin.style.display = 'flex';
+    labelWelcome.textContent = 'Log in to get started:'
+    btnLogout.remove();
+    btnLogout = '';
+    })}
+
     labelDate.textContent = new Intl.DateTimeFormat(
       currentAccount.locale,
       options
@@ -265,6 +279,7 @@ btnLogin.addEventListener("click", function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = "";
     inputLoginPin.blur();
+    console.log(btnLogout)
 
     // Timer
     if (timer) clearInterval(timer);
@@ -272,8 +287,11 @@ btnLogin.addEventListener("click", function (e) {
 
     // Update UI
     updateUI(currentAccount);
+
+
   }
 });
+
 
 btnTransfer.addEventListener("click", function (e) {
   e.preventDefault();
@@ -343,7 +361,6 @@ btnClose.addEventListener("click", function (e) {
     const index = accounts.findIndex(
       (acc) => acc.username === currentAccount.username
     );
-    console.log(index);
     // .indexOf(23)
 
     // Delete account

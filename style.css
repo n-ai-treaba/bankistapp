@@ -24,7 +24,15 @@ nav {
   align-items: center;
   padding: 0 2rem;
 }
-
+.nav__btn {
+    border: 3px;
+    border-radius: 5px;
+    background: linear-gradient(to top left #bbb, #888);
+    font-size: 3.2rem;
+    color: #272727;
+    cursor: pointer;
+    padding: 0.5rem;
+}
 .welcome {
   font-size: 1.9rem;
   font-weight: 500;
@@ -100,7 +108,6 @@ nav {
 
   /* NOTE This creates the fade in/out anumation */
   opacity: 0;
-  transition: all 1s;
 }
 
 .balance {
