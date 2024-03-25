@@ -38,7 +38,7 @@ nav {
   font-weight: 500;
   padding-right: 60px;
   padding-top: 10px;
-  padding-left: 200px;
+  padding-left: 80px;
 }
 
 .logo {
@@ -50,14 +50,34 @@ nav {
   background-color: #bbbbbb;
   border-radius: 15px;
   padding: 50px;
+  padding-left: 150px;
   margin-top: 100px;
   margin-right: 400px;
   margin-left: 300px;
 }
-
+.register {
+    display: flex;
+    background-color: #bbbbbb;
+    border-radius: 15px;
+    padding: 50px;
+    padding-left: 150px;
+    margin-top: 100px;
+    margin-right: 400px;
+    margin-left: 300px;
+  }
+.register__btn {
+  padding-top: 35px;
+  padding-left: 35px;
+  padding-right: 50px;
+  cursor: pointer;
+  background-image: linear-gradient(to top left, #39b385, #9be15d);
+  border-radius: 10px;
+  margin-left: 200px;
+}
 .login__input {
   border: none;
   padding: 0.5rem 2rem;
+  margin-top: 20px;
   font-size: 1.6rem;
   font-family: inherit;
   text-align: center;
@@ -306,4 +326,7 @@ h2 {
 
 .timer {
   font-weight: 600;
+}
+.hidden {
+  display: none;
 }
