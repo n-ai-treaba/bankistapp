@@ -48,6 +48,8 @@ const account2 = {
 };
 
 let accounts = [account1, account2];
+let options;
+let now;
 /////////////////////////////////////////////////
 // Elements
 const labelRegister = document.querySelectorAll('.register__btn');
@@ -92,6 +94,22 @@ const getLocalStorage = function() {
    console.log(accounts);
 }
 getLocalStorage()
+
+const loginInit = function() {
+  labelWelcome.textContent = `Welcome back, ${
+    currentAccount.owner.split(" ")[0]
+  }`;
+  containerApp.style.opacity = 100;
+  containerLogin.classList.add('hidden');
+  // Create current date and time
+  now = new Date();
+  options = {
+    hour: "numeric",
+    minute: "numeric",
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+}}
 
 const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
@@ -242,7 +260,8 @@ registerForm.addEventListener('submit', function(e) {
   const account = {
     owner: user,
     pin: pin,
-    movements: [0],
+    movements: [],
+    movementsDates: [],
     currency: "EUR",
     locale: locale,
     interestRate: 1,
@@ -251,7 +270,13 @@ registerForm.addEventListener('submit', function(e) {
   accounts.push(account);
   createUsernames(accounts);
   console.log(accounts)
-  inputLoginUsername.value = inputRegisterPin.value = '';
+  inputRegisterUsername.value = inputRegisterPin.value = '';
+  currentAccount = account;
+  loginInit()
+  updateUI(currentAccount)
+  containerRegister.classList.add('hidden')
+  if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
 })
 
 labelRegister.forEach((el) => el.addEventListener('click', function(e) {
@@ -272,19 +297,7 @@ btnLogin.addEventListener("click", function (e) {
 
   if (currentAccount?.pin === +inputLoginPin.value) {
     // Display UI and message
-    labelWelcome.textContent = `Welcome back, ${
-      currentAccount.owner.split(" ")[0]
-    }`;
-    containerApp.style.opacity = 100;
-    containerLogin.classList.add('hidden');
-    // Create current date and time
-    const now = new Date();
-    const options = {
-      hour: "numeric",
-      minute: "numeric",
-      day: "numeric",
-      month: "numeric",
-      year: "numeric",
+    loginInit();
       // weekday: 'long',
     };
     // const locale = navigator.language;
@@ -321,7 +334,7 @@ btnLogin.addEventListener("click", function (e) {
 
 
   }
-});
+);
 
 
 btnTransfer.addEventListener("click", function (e) {
@@ -397,9 +410,10 @@ btnClose.addEventListener("click", function (e) {
     // Delete account
     accounts.splice(index, 1);
 
-    // Hide UI
+    // Change UI
+    labelWelcome.textContent = "Log In to get started:"
     containerApp.style.opacity = 0;
-    containerLogin.style.display = 'flex';
+    containerLogin.classList.toggle('hidden');
   }
 
   inputCloseUsername.value = inputClosePin.value = "";

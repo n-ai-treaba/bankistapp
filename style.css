@@ -55,6 +55,10 @@ nav {
   margin-right: 400px;
   margin-left: 300px;
 }
+
+#login{
+  background-image: linear-gradient(to top left, #ffb003, #ffcb03);
+}
 .register {
     display: flex;
     background-color: #bbbbbb;
