@@ -22,9 +22,9 @@
       
     </nav>
     <div class="login">
-      <p class="welcome">Log in to get started:</p>
       
-        <form >
+      <form class="login__el">
+          <p class="welcome">Log in to get started:</p>
           <input
             type="text"
             placeholder="user"
@@ -38,7 +38,28 @@
           />
           <button class="login__btn">&rarr;</button>
         </form>
-      
+        <p class="login__el welcome register__btn">Click here to Register</p>
+    </div>
+        <div class="register hidden">
+          <form class="register__form">
+          <p class="welcome">Enter Name and Pin</p>
+          <input
+            type="text"
+            placeholder="user"
+            class="login__input login__input--user"
+            id="register__name"
+          />
+          <input
+            type="password"
+            placeholder="PIN"
+            maxlength="4"
+            class="login__input login__input--pin"
+            id="register__pin"
+            />
+          <button class="login__btn">&rarr;</button>
+          >
+        </form>
+        <p class="login__el welcome register__btn "id="login">Click here to Log In</p>
     </div>
 
     <main class="app">

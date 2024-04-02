@@ -48,9 +48,11 @@ const account2 = {
 };
 
 let accounts = [account1, account2];
-
+let options;
+let now;
 /////////////////////////////////////////////////
 // Elements
+const labelRegister = document.querySelectorAll('.register__btn');
 const labelWelcome = document.querySelector(".welcome");
 const labelDate = document.querySelector(".date");
 const labelBalance = document.querySelector(".balance__value");
@@ -61,6 +63,7 @@ const labelTimer = document.querySelector(".timer");
 
 const containerNav = document.querySelector('.nav');
 const containerLogin = document.querySelector('.login');
+const containerRegister = document.querySelector('.register');
 const containerApp = document.querySelector(".app");
 const containerMovements = document.querySelector(".movements");
 
@@ -71,10 +74,11 @@ const btnClose = document.querySelector(".form__btn--close");
 const btnSort = document.querySelector(".btn--sort");
 let btnLogout;
 
+const registerForm = document.querySelector('.register__form');
 const inputLoginUsername = document.querySelector(".login__input--user");
 const inputLoginPin = document.querySelector(".login__input--pin");
-const inputRegisterUsername = document.getElementById('register__user');
-const inputRegisterPin = document.getElementById('register__pin');
+const inputRegisterUsername = document.querySelector('#register__name');
+const inputRegisterPin = document.querySelector('#register__pin');
 const inputTransferTo = document.querySelector(".form__input--to");
 const inputTransferAmount = document.querySelector(".form__input--amount");
 const inputLoanAmount = document.querySelector(".form__input--loan-amount");
@@ -89,8 +93,23 @@ const getLocalStorage = function() {
    localStorage.setItem('accounts', JSON.stringify(accounts))
    console.log(accounts);
 }
+getLocalStorage()
 
-
+const loginInit = function() {
+  labelWelcome.textContent = `Welcome back, ${
+    currentAccount.owner.split(" ")[0]
+  }`;
+  containerApp.style.opacity = 100;
+  containerLogin.classList.add('hidden');
+  // Create current date and time
+  now = new Date();
+  options = {
+    hour: "numeric",
+    minute: "numeric",
+    day: "numeric",
+    month: "numeric",
+    year: "numeric",
+}}
 
 cons
 const formatMovementDate = function (date, locale) {
@@ -215,7 +234,7 @@ const startLogOutTimer = function () {
   };
 
   // Set time to 5 minutes
-  let time = 120;
+  let time = 600;
 
   // Call the timer every second
   tick();
@@ -232,8 +251,42 @@ let currentAccount, timer;
 // currentAccount = account1;
 // updateUI(currentAccount);
 // containerApp.style.opacity = 100;
-getLocalStorage();
+registerForm.addEventListener('submit', function(e) {
+  e.preventDefault();
 
+  const user = inputRegisterUsername.value;
+  const pin = +inputRegisterPin.value;
+  const locale = navigator.language
+  if(!user && !pin) return;
+  const account = {
+    owner: user,
+    pin: pin,
+    movements: [],
+    movementsDates: [],
+    currency: "EUR",
+    locale: locale,
+    interestRate: 1,
+    balance: 0,
+  }
+  accounts.push(account);
+  createUsernames(accounts);
+  console.log(accounts)
+  inputRegisterUsername.value = inputRegisterPin.value = '';
+  currentAccount = account;
+  loginInit()
+  updateUI(currentAccount)
+  containerRegister.classList.add('hidden')
+  if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
+})
+
+labelRegister.forEach((el) => el.addEventListener('click', function(e) {
+  e.preventDefault();
+  console.log(containerLogin);
+  console.log(containerRegister);
+  containerRegister.classList.toggle('hidden');
+  containerLogin.classList.toggle('hidden');
+}))
 btnLogin.addEventListener("click", function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -245,19 +298,7 @@ btnLogin.addEventListener("click", function (e) {
 
   if (currentAccount?.pin === +inputLoginPin.value) {
     // Display UI and message
-    labelWelcome.textContent = `Welcome back, ${
-      currentAccount.owner.split(" ")[0]
-    }`;
-    containerApp.style.opacity = 100;
-    containerLogin.style.display = 'none';
-    // Create current date and time
-    const now = new Date();
-    const options = {
-      hour: "numeric",
-      minute: "numeric",
-      day: "numeric",
-      month: "numeric",
-      year: "numeric",
+    loginInit();
       // weekday: 'long',
     };
     // const locale = navigator.language;
@@ -269,7 +310,7 @@ btnLogin.addEventListener("click", function (e) {
     btnLogout.addEventListener('click', function(e) {
       e.preventDefault();
       containerApp.style.opacity = 0;
-    containerLogin.style.display = 'flex';
+      containerLogin.classList.toggle('hidden');
     labelWelcome.textContent = 'Log in to get started:'
     btnLogout.remove();
     btnLogout = '';
@@ -284,7 +325,6 @@ btnLogin.addEventListener("click", function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = "";
     inputLoginPin.blur();
-console.log(btnLogout)
 
     // Timer
     if (timer) clearInterval(timer);
@@ -295,7 +335,7 @@ console.log(btnLogout)
 
 
   }
-});
+);
 
 
 btnTransfer.addEventListener("click", function (e) {
@@ -372,9 +412,10 @@ btnClose.addEventListener("click", function (e) {
     // Delete account
     accounts.splice(index, 1);
 
-    // Hide UI
+    // Change UI
+    labelWelcome.textContent = "Log In to get started:"
     containerApp.style.opacity = 0;
-    containerLogin.style.display = 'flex';
+    containerLogin.classList.toggle('hidden');
   }
 
   inputCloseUsername.value = inputClosePin.value = "";
