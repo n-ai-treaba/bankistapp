@@ -59,7 +59,6 @@ const labelSumOut = document.querySelector(".summary__value--out");
 const labelSumInterest = document.querySelector(".summary__value--interest");
 const labelTimer = document.querySelector(".timer");
 
-const containerNav = document.querySelector('.nav');
 const containerLogin = document.querySelector('.login');
 const containerApp = document.querySelector(".app");
 const containerMovements = document.querySelector(".movements");
@@ -69,7 +68,6 @@ const btnTransfer = document.querySelector(".form__btn--transfer");
 const btnLoan = document.querySelector(".form__btn--loan");
 const btnClose = document.querySelector(".form__btn--close");
 const btnSort = document.querySelector(".btn--sort");
-let btnLogout;
 
 const inputLoginUsername = document.querySelector(".login__input--user");
 const inputLoginPin = document.querySelector(".login__input--pin");
@@ -361,6 +359,7 @@ btnClose.addEventListener("click", function (e) {
     const index = accounts.findIndex(
       (acc) => acc.username === currentAccount.username
     );
+    console.log(index);
     // .indexOf(23)
 
     // Delete account
