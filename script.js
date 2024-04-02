@@ -59,6 +59,7 @@ const labelSumOut = document.querySelector(".summary__value--out");
 const labelSumInterest = document.querySelector(".summary__value--interest");
 const labelTimer = document.querySelector(".timer");
 
+const containerNav = document.querySelector('.nav');
 const containerLogin = document.querySelector('.login');
 const containerApp = document.querySelector(".app");
 const containerMovements = document.querySelector(".movements");
@@ -68,9 +69,12 @@ const btnTransfer = document.querySelector(".form__btn--transfer");
 const btnLoan = document.querySelector(".form__btn--loan");
 const btnClose = document.querySelector(".form__btn--close");
 const btnSort = document.querySelector(".btn--sort");
+let btnLogout;
 
 const inputLoginUsername = document.querySelector(".login__input--user");
 const inputLoginPin = document.querySelector(".login__input--pin");
+const inputRegisterUsername = document.getElementById('register__user');
+const inputRegisterPin = document.getElementById('register__pin');
 const inputTransferTo = document.querySelector(".form__input--to");
 const inputTransferAmount = document.querySelector(".form__input--amount");
 const inputLoanAmount = document.querySelector(".form__input--loan-amount");
@@ -85,8 +89,10 @@ const getLocalStorage = function() {
    localStorage.setItem('accounts', JSON.stringify(accounts))
    console.log(accounts);
 }
-getLocalStorage()
 
+
+
+cons
 const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
@@ -226,6 +232,7 @@ let currentAccount, timer;
 // currentAccount = account1;
 // updateUI(currentAccount);
 // containerApp.style.opacity = 100;
+getLocalStorage();
 
 btnLogin.addEventListener("click", function (e) {
   // Prevent form from submitting
@@ -277,7 +284,7 @@ btnLogin.addEventListener("click", function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = "";
     inputLoginPin.blur();
-    console.log(btnLogout)
+console.log(btnLogout)
 
     // Timer
     if (timer) clearInterval(timer);
@@ -359,7 +366,7 @@ btnClose.addEventListener("click", function (e) {
     const index = accounts.findIndex(
       (acc) => acc.username === currentAccount.username
     );
-    console.log(index);
+   
     // .indexOf(23)
 
     // Delete account
