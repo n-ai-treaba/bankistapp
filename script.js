@@ -111,7 +111,6 @@ const loginInit = function() {
     year: "numeric",
 }}
 
-cons
 const formatMovementDate = function (date, locale) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
